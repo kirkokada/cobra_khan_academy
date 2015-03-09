@@ -1,5 +1,8 @@
-.jumbotron
-  %h1 Every body is a machine
-  %h2 This is the manual
-  %p
-    = link_to "Create account", "#", class: "btn btn-success home-signup-button"
+- if current_user
+  .jumbotron
+    %h1 Every body is a machine
+    %h2 This is the manual
+    %p
+      = link_to "Create account", new_user_registration_path, class: "btn btn-success home-signup-button"
+- else
+  %h1 Hello!

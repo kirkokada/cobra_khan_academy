@@ -3,7 +3,7 @@
     = render 'layouts/navbar_header'
     .collapse.navbar-collapse#navbar-collapse1
       %ul.nav.navbar-nav.navbar-left
-        %li
+        %li.dropdown
           %a.dropdown-toggle#subject-dropdown{ "href": "#", "data-toggle": "dropdown", "aria-expanded": true}
             Subjects <span class="caret" />
           %ul.dropdown-menu{"role": "menu", "aria-labelledby": "subject-dropdown"}
@@ -20,4 +20,7 @@
             %button.btn.btn-default{"type": "submit"}
               %span.glyphicon.glyphicon-search
       %ul.nav.navbar-nav.navbar-right
-        %li= link_to "Sign in", "#"
+        - if current_user
+          %li= link_to "Signed in!", "#"
+        - else
+          %li= link_to "Sign in", new_user_session_path
