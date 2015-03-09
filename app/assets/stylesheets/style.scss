@@ -1,0 +1,73 @@
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* grid */
+
+.container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* navbar */
+
+.navbar {
+  border-radius: 0;
+  border-bottom: 1px solid #000;
+  background-color: #FFF;
+  color: #000;
+  margin-bottom: 0;
+}
+
+.dropdown-menu li {
+  border-left: none !important;
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  .cobra {
+    font-weight: bolder;
+  }
+  .khan {
+    font-weight: lighter;
+  }
+  .academy {
+    font-weight: bold;
+  }
+}
+
+.navbar li {
+  border-left: 1px solid #000;
+}
+
+.navbar-form .form-group input {
+  border-radius: 0;
+} 
+
+/* front page */
+
+.jumbotron {
+  background-image: 
+    linear-gradient(
+      rgba(50, 125, 125, 0.45), 
+      rgba(50, 125, 125, 0.45)
+    ),
+    image-url("the_boxer_hands.jpg");
+  background-size: cover;
+  height: 100%;
+  color: White;
+  .small {
+    color: $gray-lighter
+  }
+  h1, h2, a, p {
+    text-align: center;
+  }
+}
+
+.home-signup-button {
+  font-size: 1.13em;
+  border: 2px white solid;
+  border-radius: 30px;
+  background-color: transparent;
+}

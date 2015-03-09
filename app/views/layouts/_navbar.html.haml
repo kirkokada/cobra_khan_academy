@@ -1,0 +1,23 @@
+%nav.navbar.navbar-default.navbar-static
+  .container-fluid
+    = render 'layouts/navbar_header'
+    .collapse.navbar-collapse#navbar-collapse1
+      %ul.nav.navbar-nav.navbar-left
+        %li
+          %a.dropdown-toggle#subject-dropdown{ "href": "#", "data-toggle": "dropdown", "aria-expanded": true}
+            Subjects <span class="caret" />
+          %ul.dropdown-menu{"role": "menu", "aria-labelledby": "subject-dropdown"}
+            %li
+              %a(href="#") Striking
+            %li
+              %a(href="#") Grappling
+            %li
+              %a(href="#") Strength and Conditioning
+        %li
+          %form.navbar-form
+            .form-group
+              %input.form-control{"type": "text", "placeholder": "Search"}
+            %button.btn.btn-default{"type": "submit"}
+              %span.glyphicon.glyphicon-search
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to "Sign in", "#"
