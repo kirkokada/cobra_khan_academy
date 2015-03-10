@@ -1,26 +1,36 @@
 %nav.navbar.navbar-default.navbar-static
   .container-fluid
     = render 'layouts/navbar_header'
-    .collapse.navbar-collapse#navbar-collapse1
+    .collapse.navbar-collapse#main-navbar
       %ul.nav.navbar-nav.navbar-left
-        %li.dropdown
-          %a.dropdown-toggle#subject-dropdown{ "href": "#", "data-toggle": "dropdown", "aria-expanded": true}
+        %li.dropdown#subject_nav
+          %a{ "href": "#subject_nav_inner", "data-toggle": "collapse", "data-parent": "#subject_nav", "aria-expanded": true, "aria-controls": "#subject_nav_inner"}
             Subjects <span class="caret" />
-          %ul.dropdown-menu{"role": "menu", "aria-labelledby": "subject-dropdown"}
-            %li
-              %a(href="#") Striking
-            %li
-              %a(href="#") Grappling
-            %li
-              %a(href="#") Strength and Conditioning
         %li
           %form.navbar-form
-            .form-group
+            .input-group
               %input.form-control{"type": "text", "placeholder": "Search"}
-            %button.btn.btn-default{"type": "submit"}
-              %span.glyphicon.glyphicon-search
+              %span.input-group-btn
+                %button.btn.btn-default{"type": "submit"}
+                  %span.glyphicon.glyphicon-search
       %ul.nav.navbar-nav.navbar-right
         - if current_user
-          %li= link_to "Sign out", destroy_user_session_path, method: :delete
+          %li.dropdown
+            %a.dropdown-toggle#user-dropdown{"href": "#", "data-toggle": "dropdown", "aria-expanded": true}
+              #{current_user.email}<span class="caret" />
+            %ul.dropdown-menu{"role": "menu", "aria-labelledby": "user-dropdown"}
+              %li= link_to "Settings", edit_user_registration_path
+              %li= link_to "Profile", "#"
+              %li.divider
+              %li= link_to "Sign out", destroy_user_session_path, method: :delete
         - else
           %li= link_to "Sign in", new_user_session_path
+.collapse#subject_nav_inner
+  .row
+    .list-group
+      .list-group-item
+        %h3 Subject 1
+      .list-group-item
+        %h3 Subject 2
+      .list-group-item
+        %h3 Subject 3

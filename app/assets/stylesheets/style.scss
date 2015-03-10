@@ -13,7 +13,7 @@
 
 .navbar {
   border-radius: 0;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid $gray-lighter;
   background-color: #FFF;
   color: #000;
   margin-bottom: 0;
@@ -24,6 +24,7 @@
 }
 
 .navbar-brand {
+  padding-left: 54px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   .cobra {
@@ -38,11 +39,15 @@
 }
 
 .navbar li {
-  border-left: 1px solid #000;
+  border-left: 1px solid $gray-lighter;
 }
 
 .navbar-form .form-group input {
   border-radius: 0;
+}
+
+.input-group-btn .btn{
+  padding: 9px 12px;
 } 
 
 /* front page */
@@ -63,6 +68,16 @@
   h1, h2, a, p {
     text-align: center;
   }
+}
+
+.list-group-item {
+  &:first-child {
+    border-top: none;
+  }
+  padding-left: 50px;
+  border-radius: 0 !important;
+  border-color: black;
+  border-left: none;
 }
 
 .home-signup-button {
@@ -87,3 +102,4 @@
 .checkbox {
   margin-left: 20px;
 }
+

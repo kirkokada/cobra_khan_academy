@@ -1,8 +1,13 @@
-- unless current_user
+- if current_user
+  .row
+    %aside.col-md-4
+      %h1 Stuff over here
+    .col-md-8
+      .container
+        %h1 Stuff over here
+- else
   .jumbotron
     %h1 Every body is a machine
     %h2 This is the manual
     %p
       = link_to "Create account", new_user_registration_path, class: "btn btn-success home-signup-button"
-- else
-  %h1 Hello!
