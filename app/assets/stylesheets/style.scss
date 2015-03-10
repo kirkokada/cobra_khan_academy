@@ -71,3 +71,19 @@
   border-radius: 30px;
   background-color: transparent;
 }
+
+/* alerts, messages */
+
+.alert {
+  margin-bottom: 0;
+  border-radius: 0;
+  li {
+    list-style-type: none;
+  }
+}
+
+/* forms */
+
+.checkbox {
+  margin-left: 20px;
+}

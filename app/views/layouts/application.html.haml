@@ -9,4 +9,8 @@
     = yield(:head)
   %body
     = render "layouts/navbar"
+    = render "layouts/messages"
     = yield
+    - if Rails.env.development?
+      .container
+      = debug(params)

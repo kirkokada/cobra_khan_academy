@@ -1,0 +1,8 @@
+- flash.each do |key, value|
+  - type = key == "notice" ? "success" : "danger"
+  %div{ class: "alert alert-#{type}"}
+    %a{href: "#", "data-dismiss": "alert", class: "close"} 
+      x
+    %ul
+      %li
+        = value

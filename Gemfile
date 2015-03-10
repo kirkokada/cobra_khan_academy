@@ -23,6 +23,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
   gem 'rb-fsevent'
+  gem 'factory_girl_rails'
   gem 'terminal-notifier'
   gem 'terminal-notifier-guard'
   gem 'capybara'
