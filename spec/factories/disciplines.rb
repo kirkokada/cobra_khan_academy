@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :discipline do
-    name "MyString"
-description "MyText"
+    name "Fighting"
+    description "A rocking good time"
   end
 
 end

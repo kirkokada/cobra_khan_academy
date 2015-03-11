@@ -3,9 +3,9 @@
     = render 'layouts/navbar_header'
     .collapse.navbar-collapse#main-navbar
       %ul.nav.navbar-nav.navbar-left
-        %li.dropdown#subject_nav
+        %li.dropdown.hidden-xs.hidden-s#subject_nav
           %a{ "href": "#subject_nav_inner", "data-toggle": "collapse", "data-parent": "#subject_nav", "aria-expanded": true, "aria-controls": "#subject_nav_inner"}
-            Subjects <span class="caret" />
+            Disciplines <span class="caret" />
         %li
           %form.navbar-form
             .input-group
@@ -13,7 +13,12 @@
               %span.input-group-btn
                 %button.btn.btn-default{"type": "submit"}
                   %span.glyphicon.glyphicon-search
+        %li.visible-xs.visible-s
+          = render "layouts/discipline_links"
       %ul.nav.navbar-nav.navbar-right
+        - if current_user.try(:is_admin?)
+          %li
+            = link_to "Admin", admin_root_url
         - if current_user
           %li.dropdown
             %a.dropdown-toggle#user-dropdown{"href": "#", "data-toggle": "dropdown", "aria-expanded": true}
@@ -25,9 +30,5 @@
               %li= link_to "Sign out", destroy_user_session_path, method: :delete
         - else
           %li= link_to "Sign in", new_user_session_path
-.collapse#subject_nav_inner
-  .row
-    .list-group
-      - Discipline.all.each do |d|
-        .list-group-item
-          = link_to d.name, "#"
+.collapse.hidden-xs.hidden-s#subject_nav_inner
+  = render "layouts/discipline_links"

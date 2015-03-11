@@ -20,6 +20,7 @@
 require "capybara/rspec"
 require "support/factory_girl"
 require "support/sign_in"
+require "devise"
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -27,6 +28,7 @@ RSpec.configure do |config|
   # assertions if you prefer.
 
   config.include Capybara::DSL
+
   
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`

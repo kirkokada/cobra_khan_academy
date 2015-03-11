@@ -1,0 +1,10 @@
+%aside.col-md-3
+  %h2= @discipline.name.titleize
+  %p
+    %em= @discipline.description
+  = link_to "History", "#", class: "list-group-item"
+  = link_to "Techniques", "#", class: "list-group-item"
+  = link_to "Concepts", "#", class: "list-group-item"
+.col-md-9
+  .container
+    %h1 Content goes here
