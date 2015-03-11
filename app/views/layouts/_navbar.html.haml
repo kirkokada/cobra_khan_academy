@@ -28,9 +28,6 @@
 .collapse#subject_nav_inner
   .row
     .list-group
-      .list-group-item
-        %h3 Subject 1
-      .list-group-item
-        %h3 Subject 2
-      .list-group-item
-        %h3 Subject 3
+      - Discipline.all.each do |d|
+        .list-group-item
+          = link_to d.name, "#"

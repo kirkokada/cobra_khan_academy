@@ -19,6 +19,7 @@
 
 require "capybara/rspec"
 require "support/factory_girl"
+require "support/sign_in"
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
