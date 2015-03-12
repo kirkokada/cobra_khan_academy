@@ -4,4 +4,14 @@ class Topic < ActiveRecord::Base
 
   validates :name, presence: true, 
                    uniqueness: { scope: :parent, case_sensitive: false}
+
+  validates :description, presence: true
+
+  scope :top_level, -> { where(parent: nil) }
+
+  delegate :name, to: :parent, prefix: true
+
+  def top_level?
+    parent.nil?    
+  end
 end

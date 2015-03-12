@@ -1,4 +1,6 @@
 .topic-links
   .list-group
-    .list-group-item
-      %h3 Placeholder
+    - Topic.top_level.each do |topic|
+      .list-group-item
+        %h3
+          = link_to topic.name, topic_path(topic)

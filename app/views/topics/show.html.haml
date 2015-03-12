@@ -1,5 +1,9 @@
 %aside.col-md-3
-  %h2= @topic.name.titleize
+  %h2
+    = @topic.name.titleize
+    - if @topic.parent
+      %span.parent_topic_name
+        ="(#{link_to @topic.parent_name, @topic.parent})".html_safe
   %p
     %em= @topic.description
   = link_to "History", "#", class: "list-group-item"
