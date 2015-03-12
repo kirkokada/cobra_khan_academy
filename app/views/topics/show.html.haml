@@ -1,10 +1,11 @@
 %aside.col-md-3
-  %h2= @discipline.name.titleize
+  %h2= @topic.name.titleize
   %p
-    %em= @discipline.description
+    %em= @topic.description
   = link_to "History", "#", class: "list-group-item"
   = link_to "Techniques", "#", class: "list-group-item"
   = link_to "Concepts", "#", class: "list-group-item"
 .col-md-9
   .container
-    %h1 Content goes here
+    - @topic.subtopics.each do |s|
+      = link_to s.name, topic_path(s)

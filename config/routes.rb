@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  get 'topics/show'
+
   root 'pages#home'
 
   ActiveAdmin.routes(self)
 
   devise_for :users
 
-  resources :disciplines, only: [:index, :show]
+  resources :topics, only: [:show]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

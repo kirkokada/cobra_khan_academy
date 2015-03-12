@@ -5,7 +5,7 @@
       %ul.nav.navbar-nav.navbar-left
         %li.dropdown.hidden-xs.hidden-s#subject_nav
           %a{ "href": "#subject_nav_inner", "data-toggle": "collapse", "data-parent": "#subject_nav", "aria-expanded": true, "aria-controls": "#subject_nav_inner"}
-            Disciplines <span class="caret" />
+            Topics <span class="caret" />
         %li
           %form.navbar-form
             .input-group
@@ -14,7 +14,7 @@
                 %button.btn.btn-default{"type": "submit"}
                   %span.glyphicon.glyphicon-search
         %li.visible-xs.visible-s
-          = render "layouts/discipline_links"
+          = render "layouts/topic_links"
       %ul.nav.navbar-nav.navbar-right
         - if current_user.try(:is_admin?)
           %li
@@ -31,4 +31,4 @@
         - else
           %li= link_to "Sign in", new_user_session_path
 .collapse.hidden-xs.hidden-s#subject_nav_inner
-  = render "layouts/discipline_links"
+  = render "layouts/topic_links"
