@@ -14,6 +14,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'unicorn'
 gem 'activeadmin', github: 'activeadmin'
+gem 'ancestry'
+gem 'ancestry_uniqueness'
 
 
 group :development, :test do

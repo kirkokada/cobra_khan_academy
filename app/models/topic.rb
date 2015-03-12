@@ -1,17 +1,8 @@
 class Topic < ActiveRecord::Base
-  belongs_to :parent, class_name: "Topic", foreign_key: "parent_id"
-  has_many :subtopics, class_name: "Topic", foreign_key: "parent_id"
+  has_ancestry
 
   validates :name, presence: true, 
-                   uniqueness: { scope: :parent, case_sensitive: false}
+                   ancestry_uniqueness: true
 
   validates :description, presence: true
-
-  scope :top_level, -> { where(parent: nil) }
-
-  delegate :name, to: :parent, prefix: true
-
-  def top_level?
-    parent.nil?    
-  end
 end

@@ -35,8 +35,8 @@ RSpec.describe "Topic", type: :request do
       it { should have_text topic.name.titleize }
       it { should have_text topic.description }
 
-      it "should have links to subtopics" do
-        topic.subtopics.each do |t|
+      it "should have links to child topics" do
+        topic.children.each do |t|
           expect(page).to have_link t.name, topic_url(t)
         end
       end

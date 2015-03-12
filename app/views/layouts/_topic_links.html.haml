@@ -1,6 +1,6 @@
 .topic-links
   .list-group
-    - Topic.top_level.each do |topic|
+    - Topic.roots.each do |topic|
       .list-group-item
         %h3
           = link_to topic.name, topic_path(topic)

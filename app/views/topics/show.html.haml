@@ -3,7 +3,7 @@
     = @topic.name.titleize
     - if @topic.parent
       %span.parent_topic_name
-        ="(#{link_to @topic.parent_name, @topic.parent})".html_safe
+        ="(#{link_to @topic.parent.name, @topic.parent})".html_safe
   %p
     %em= @topic.description
   = link_to "History", "#", class: "list-group-item"
@@ -11,5 +11,5 @@
   = link_to "Concepts", "#", class: "list-group-item"
 .col-md-9
   .container
-    - @topic.subtopics.each do |s|
-      = link_to s.name, topic_path(s)
+    - @topic.children.each do |child|
+      = link_to child.name, topic_path(child)
