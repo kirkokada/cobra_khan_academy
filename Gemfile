@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'unicorn'
 gem 'activeadmin', github: 'activeadmin'
+gem 'active_admin-sortable_tree'
 gem 'ancestry'
 gem 'ancestry_uniqueness'
 

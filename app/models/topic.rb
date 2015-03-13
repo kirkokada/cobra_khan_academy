@@ -1,5 +1,6 @@
 class Topic < ActiveRecord::Base
-  has_ancestry
+  attr_accessor :position
+  has_ancestry orphan_strategy: :rootify
 
   validates :name, presence: true, 
                    ancestry_uniqueness: true
