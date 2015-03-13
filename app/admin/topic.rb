@@ -15,9 +15,30 @@ ActiveAdmin.register Topic do
     end
   end
 
+  index as: :table do
+    column :id
+    column :name
+    column :ancestry
+    actions
+  end
+
+  form do |f|
+    f.semantic_errors
+    inputs do
+      input :name
+      input :description
+      input :ancestry, as: :hidden unless f.object.ancestry.nil?
+    end
+    actions
+  end
+
   controller do
     def new
-      @topic = Topic.new(ancestry: params[:id])
+      if parent = Topic.find_by_id(params[:id])
+        @topic = parent.children.build()
+      else
+        @topic = Topic.new
+      end
     end
   end
 end
