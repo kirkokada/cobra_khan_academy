@@ -17,6 +17,8 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'active_admin-sortable_tree'
 gem 'ancestry'
 gem 'ancestry_uniqueness'
+gem 'figaro'
+gem 'youtube_it'
 
 
 group :development, :test do
@@ -32,6 +34,8 @@ group :development, :test do
   gem 'terminal-notifier'
   gem 'terminal-notifier-guard'
   gem 'capybara'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do

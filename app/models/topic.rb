@@ -1,5 +1,6 @@
 class Topic < ActiveRecord::Base
   attr_accessor :position
+  has_many :instructionals
   has_ancestry orphan_strategy: :rootify
 
   validates :name, presence: true, 

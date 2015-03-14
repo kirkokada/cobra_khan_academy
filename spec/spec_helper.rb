@@ -20,6 +20,7 @@
 require "capybara/rspec"
 require "support/factory_girl"
 require "support/sign_in"
+require "support/vcr"
 require "devise"
 
 RSpec.configure do |config|
