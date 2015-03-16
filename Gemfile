@@ -30,6 +30,9 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
   gem 'rb-fsevent'
+end
+
+group :test do
   gem 'factory_girl_rails'
   gem 'terminal-notifier'
   gem 'terminal-notifier-guard'

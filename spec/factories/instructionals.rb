@@ -1,8 +1,5 @@
 FactoryGirl.define do
   factory :instructional do
-    title "MyString"
-description "MyText"
-url "MyString"
+    url "http://youtu.be/9bZkp7q19f0"
   end
-
 end

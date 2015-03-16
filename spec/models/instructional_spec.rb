@@ -15,7 +15,7 @@ RSpec.describe Instructional, type: :model do
 
   describe "when url" do
     
-    describe "has the proper format" do
+    describe "is formatted correctly" do
       
       it "should be valid" do
         valid_urls = %w[http://www.youtube.com/watch?v=0zM3nApSvMg&feature=feedrecgrecindex 
@@ -31,10 +31,23 @@ RSpec.describe Instructional, type: :model do
         end
       end
     end
+
+    describe "is formatted incorrectly" do
+      
+      it "should not be valid" do
+        invalid_urls = %w[http://www.ytube.com/watch?v=inv@lid
+                          http://www.vimeo.com
+                          http://youtu.bee]
+        invalid_urls.each do |url|
+          subject.url = url
+          expect(subject).not_to be_valid
+        end
+      end
+    end
   end
 
   describe "when saved" do
-    let(:uid) { "9bZkp7q19f0" } # Gangman Style
+    let(:uid) { "9bZkp7q19f0" } # Gangman Style!
     let(:url) { "http://youtu.be/#{uid}" }
 
     before do

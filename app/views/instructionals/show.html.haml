@@ -1,0 +1,11 @@
+%aside.col-md-3
+  %h2
+    = link_to @instructional.title, @instructional.url
+  %h3.small
+    Courtesy of #{link_to @instructional.author, @instructional.author_url}
+.col-md-9
+  .instructional_video
+    = @instructional.embed_html5_video.html_safe
+  .instructional_description
+    %p
+      %em= @instructional.description

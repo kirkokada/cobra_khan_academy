@@ -19,7 +19,7 @@ RSpec.describe TopicsController, type: :controller do
         get :show, id: create(:topic).id
       end
 
-      its(:code) { should eq("200") } 
+      it { should have_http_status(:success) }
     end
   end
 end

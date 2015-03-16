@@ -12,16 +12,32 @@ class Instructional < ActiveRecord::Base
   before_validation :get_uid_from_url
   before_create :get_additional_info
 
+
+  def video
+    @video ||= get_video
+  end
+
+  def embed_html5_video(options={})
+    video.embed_html5(options)
+  end
+
+  def author_url
+    "https://youtube.com/user/" + self.author
+  end
+
+  private
+
   def get_uid_from_url
     uid = url.match(VALID_URL_REGEX)
     self.uid = uid[2] if uid && uid[2]
   end
 
-  private
+  def get_video
+    client = YouTubeIt::Client.new(dev_key: ENV["google_api_key"])
+    client.video_by(uid)
+  end
 
   def get_additional_info
-    client = YouTubeIt::Client.new(dev_key: ENV["google_api_key"])
-    video = client.video_by(uid)
     self.title = video.title             if self.title.blank?
     self.description = video.description if self.description.blank?
     self.author = video.author.name

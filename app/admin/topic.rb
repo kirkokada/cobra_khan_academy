@@ -22,6 +22,12 @@ ActiveAdmin.register Topic do
     actions
   end
 
+  sidebar "Topic Details", only: [:show, :edit] do
+    ul do
+      li link_to "Instructionals", admin_topic_instructionals_path(topic)
+    end
+  end
+
   form do |f|
     f.semantic_errors
     inputs do
