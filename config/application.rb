@@ -31,7 +31,7 @@ module CobraKhanAcademy
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    # Force application to not access teh DB or load models when precompiling assets
+    # Force application to not access the DB or load models when precompiling assets
     config.assets.initialize_on_precompile = false
   end
 end
