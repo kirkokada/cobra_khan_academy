@@ -28,6 +28,9 @@ RSpec.describe "Topic pages", type: :request do
 
       before do 
         3.times { create :topic, parent_id: topic.id }
+        VCR.use_cassette "instructional_save" do
+          create :instructional, topic: topic
+        end
         sign_in user
         visit topic_path(topic)
       end
@@ -38,6 +41,12 @@ RSpec.describe "Topic pages", type: :request do
       it "should have links to child topics" do
         topic.children.each do |t|
           expect(page).to have_link t.name, topic_url(t)
+        end
+      end
+
+      it "should have links to instructionals" do
+        topic.instructionals.each do |i|
+          expect(page).to have_link i.title, instructional_url(i)
         end
       end
     end

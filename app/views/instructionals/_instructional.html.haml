@@ -1,0 +1,10 @@
+.topic_instructional.list-group-item
+  .row
+    .col-sm-2.hidden-xs.topic_instructional_thumbnail
+      = link_to instructional do
+        = image_tag instructional.thumbnail
+    .col-sm-10.topic_instructional_info
+      .topic_instructional_title
+        = link_to instructional.title, instructional_path(instructional)
+      .topic_instructional_description
+        = truncate(instructional.description, length: 140)

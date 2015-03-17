@@ -1,14 +1,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* grid */
+/* general */
 
 .container {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-/* navbar */
+body {
+  background-color: #f5f5f5;
+}
+
+/* navigation */
 
 .navbar {
   border-radius: 0;
@@ -35,6 +39,10 @@
   .academy {
     font-weight: bold;
   }
+}
+
+.breadcrumb {
+  margin-bottom: 5px;
 }
 
 .navbar li {
@@ -112,16 +120,23 @@ aside.col-md-3 {
   padding-right: 0;
 }
 
-aside.col-md-3  h2, h3, p {
-  padding-left: 15px;
-}
-
 /* topics */
 
 h2 .parent_topic_name {
   font-size: 0.8em
 }
 
+.topic_instructional_title {
+  font-size: 1.2em;
+}
+
+.topic_instructional_description {
+  font-style: italic;
+}
+
+.topic_instructional_thumbnail img {
+  width: 100%
+}
 /* instructionals */
 
 .instructional_video {

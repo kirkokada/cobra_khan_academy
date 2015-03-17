@@ -25,6 +25,10 @@ class Instructional < ActiveRecord::Base
     "https://youtube.com/user/" + self.author
   end
 
+  def thumbnail
+    "http://img.youtube.com/vi/#{uid}/default.jpg"
+  end
+
   private
 
   def get_uid_from_url
