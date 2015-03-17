@@ -41,4 +41,17 @@ RSpec.describe Topic, type: :model do
       expect(topic).not_to be_valid
     end
   end
+
+  describe "slug" do
+    let(:child) { topic.children.build(name: "child", description: "Child topic") }
+    let(:grandchild) { child.children.build(name: "grandchild", description: "Grandchild topic") }
+    
+    it "should contain the names of its ancestors" do
+      topic.save
+      child.save
+      grandchild.save
+      expected_sequence = topic.name + " " + child.name + " " + grandchild.name
+      expect(grandchild.slug).to eq(expected_sequence.parameterize) 
+    end
+  end
 end

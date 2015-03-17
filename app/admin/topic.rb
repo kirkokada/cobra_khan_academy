@@ -40,7 +40,7 @@ ActiveAdmin.register Topic do
 
   controller do
     def new
-      if parent = Topic.find_by_id(params[:id])
+      if parent = Topic.find_by(slug: params[:id])
         @topic = parent.children.build()
       else
         @topic = Topic.new

@@ -12,6 +12,7 @@ RSpec.describe Instructional, type: :model do
   it { should respond_to :uid }
   it { should respond_to :topic }
   it { should respond_to :topic_id }
+  it { should respond_to :slug }
 
   describe "when url" do
     

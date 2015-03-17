@@ -1,4 +1,7 @@
 class Instructional < ActiveRecord::Base
+  extend FriendlyId
+
+  friendly_id :title, use: [:slugged, :finders]
   belongs_to :topic
 
   VALID_URL_REGEX = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
