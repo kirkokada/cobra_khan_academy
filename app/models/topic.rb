@@ -19,6 +19,10 @@ class Topic < ActiveRecord::Base
     names.join(" ")
   end
 
+  def descendant_instructionals
+    Instructional.where("topic_id IN (:descendant_ids)", descendant_ids: descendant_ids)
+  end
+
   private
 
   # Creates a string using the names of ancestors for use as a slug

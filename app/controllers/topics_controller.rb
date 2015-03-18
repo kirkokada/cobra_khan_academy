@@ -4,5 +4,6 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @instructionals = @topic.instructionals.paginate(page: params[:page])
+    @related = @topic.descendant_instructionals
   end
 end

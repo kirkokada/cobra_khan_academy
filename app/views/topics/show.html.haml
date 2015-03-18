@@ -13,5 +13,9 @@
     - @topic.children.each do |child|
       .list-group-item= link_to child.name, topic_path(child)
 .col-md-9
-  = render @instructionals if @instructionals
-  = will_paginate @instructionals 
+  = render @instructionals if @instructionals.any?
+  = will_paginate @instructionals
+  - if @related.any?
+    .list-group-item
+      %h3 Related Instructionals
+    = render @related

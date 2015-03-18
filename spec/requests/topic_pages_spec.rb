@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "Topic pages", type: :request do
   subject { page }
   let(:user) { create :user }
+  let!(:topic) { create :topic }
 
   describe "show" do
-    let!(:topic) { create :topic }
 
     describe "without logging in" do
       
@@ -68,11 +68,40 @@ RSpec.describe "Topic pages", type: :request do
         Topic.all.each do |topic|
           expect(page).to have_text topic.name
           expect(page).to have_link "New Child", new_admin_child_topic_path(topic)
+          expect(page).to have_link "New Instructional", new_admin_topic_instructional_path(topic)
         end
       end
     end
 
-    describe "new topic" do
+    describe "show" do
+      before do
+        VCR.use_cassette "instructional_save" do
+          create :instructional, topic: topic
+        end
+        visit admin_topic_path(topic)
+      end
+      
+      describe "page" do
+        
+        it { should have_link "New Instructional", new_admin_topic_instructional_path(topic) }
+        it { should have_content topic.name }
+        it { should have_content topic.description }
+        it { should have_content topic.slug }
+        it { should have_content topic.ancestry }
+
+        it "should display instructionals" do
+          topic.instructionals.each do |instructional|
+            expect(page).to have_text instructional.title
+            expect(page).to have_link "Edit", 
+                                       edit_admin_topic_instructional_path(topic, instructional)
+            expect(page).to have_link "Delete",
+                                      admin_topic_instructional_path(topic, instructional)
+          end
+        end
+      end
+    end
+
+    describe "new" do
 
       before do 
         visit new_admin_topic_path

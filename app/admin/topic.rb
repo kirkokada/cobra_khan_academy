@@ -10,21 +10,52 @@ ActiveAdmin.register Topic do
 
   index as: :sortable do
     label :name
-    actions default: true do |topic|
-      link_to "New Child", new_admin_child_topic_path(topic)
+    actions do |topic|
+      links = ""
+      links << link_to("New Child", 
+                       new_admin_child_topic_path(topic), 
+                       class: "member_link")
+      links << link_to("New Instructional", 
+                        new_admin_topic_instructional_path(topic), 
+                        class: "member_link")
+      links.html_safe
     end
   end
 
-  index as: :table do
-    column :id
-    column :name
-    column :ancestry
-    actions
+  action_item :new_instructional, only: :show do
+    link_to "New Instructional", new_admin_topic_instructional_path(topic)
+  end
+
+  show do
+    panel "Instructionals" do
+      table_for topic.instructionals do 
+        column :title
+        column :url
+        column(:actions) do |instructional|
+          links = ""
+          links << link_to("Edit", 
+                           edit_admin_topic_instructional_path(topic, instructional), 
+                           class: "member_link")
+          links << link_to("Delete", 
+                           admin_topic_instructional_path(topic, instructional), 
+                           class: "member_link",
+                           method: :delete)
+          links.html_safe
+        end
+      end
+    end
+    active_admin_comments
   end
 
   sidebar "Topic Details", only: [:show, :edit] do
-    ul do
-      li link_to "Instructionals", admin_topic_instructionals_path(topic)
+    attributes_table_for topic do
+      row :id
+      row :name
+      row :description
+      row :ancestry
+      row :slug
+      row :created_at
+      row :updated_at
     end
   end
 
