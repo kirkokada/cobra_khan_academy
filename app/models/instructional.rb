@@ -2,6 +2,7 @@ class Instructional < ActiveRecord::Base
   extend FriendlyId
 
   friendly_id :title, use: [:slugged, :finders]
+
   belongs_to :topic
 
   VALID_URL_REGEX = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
@@ -13,7 +14,7 @@ class Instructional < ActiveRecord::Base
                   uniqueness: true
 
   before_validation :get_uid_from_url
-  before_create :get_additional_info
+  before_validation :get_additional_info
 
 
   def video
@@ -35,30 +36,27 @@ class Instructional < ActiveRecord::Base
   private
 
   def get_uid_from_url
-    uid = url.match(VALID_URL_REGEX)
-    self.uid = uid[2] if uid && uid[2]
+    matches = url.match(VALID_URL_REGEX)
+    self.uid = matches[2] if matches && matches[2]
   end
 
   def get_video
     client = YouTubeIt::Client.new(dev_key: ENV["google_api_key"])
-    client.video_by(uid)
+    begin
+      client.video_by(uid)
+    rescue OpenURI::HTTPError => error
+      self.errors.add(:url)
+      nil
+    end
   end
 
   def get_additional_info
-    self.title = video.title             if self.title.blank?
-    self.description = video.description if self.description.blank?
-    self.author = video.author.name
-    self.duration = parse_duration(video.duration)
-  end
-
-  def parse_duration(duration)
-    hours = (duration / 3600).floor
-    minutes = (duration - (hours * 3600) / 60).floor
-    seconds = (duration - (hours * 3600) - (minutes * 60)).floor
-    hours = "0" + hours.to_s if hours.to_i < 10
-    minutes = "0" + minutes.to_s if minutes.to_i < 10
-    seconds = "0" + seconds.to_s if seconds.to_i < 10
-
-    hours.to_s + ":" + minutes.to_s + ":" + seconds.to_s
+    unless video.nil?
+      self.title = video.title             if self.title.blank?
+      self.slug = title.parameterize
+      self.description = video.description if self.description.blank?
+      self.author = video.author.name
+      self.duration = video.duration
+    end
   end
 end

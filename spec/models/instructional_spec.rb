@@ -19,16 +19,18 @@ RSpec.describe Instructional, type: :model do
     describe "is formatted correctly" do
       
       it "should be valid" do
-        valid_urls = %w[http://www.youtube.com/watch?v=0zM3nApSvMg&feature=feedrecgrecindex 
+        valid_urls = %w[http://www.youtube.com/watch?v=9bZkp7q19f0&feature=feedrecgrecindex 
                         http://www.youtube.com/user/IngridMichaelsonVEVO#p/a/u/1/QdK8U-VIH_o
-                        http://www.youtube.com/v/0zM3nApSvMg?fs=1&hl=en_US&rel=0
-                        http://www.youtube.com/embed/0zM3nApSvMg?rel=0
-                        http://www.youtube.com/watch?v=0zM3nApSvMg
-                        http://youtu.be/0zM3nApSvMg
-                        http://www.youtube.com/watch?v=0zM3nApSvMg#t=0m10s]
+                        http://www.youtube.com/v/9bZkp7q19f0?fs=1&hl=en_US&rel=0
+                        http://www.youtube.com/embed/9bZkp7q19f0?rel=0
+                        http://www.youtube.com/watch?v=9bZkp7q19f0
+                        http://youtu.be/9bZkp7q19f0
+                        http://www.youtube.com/watch?v=9bZkp7q19f0#t=0m10s]
         valid_urls.each do |url|
           subject.url = url 
-          expect(subject).to be_valid 
+          VCR.use_cassette "instructional_save" do
+            expect(subject).to be_valid 
+          end
         end
       end
     end
@@ -41,7 +43,9 @@ RSpec.describe Instructional, type: :model do
                           http://youtu.bee]
         invalid_urls.each do |url|
           subject.url = url
-          expect(subject).not_to be_valid
+          VCR.use_cassette "invalid_instructional_save" do
+            expect(subject).not_to be_valid
+          end
         end
       end
     end
@@ -62,5 +66,7 @@ RSpec.describe Instructional, type: :model do
     its(:author)   { should_not be_blank }
     its(:duration) { should_not be_blank }
     its(:title)    { should_not be_blank }
+    its(:slug)     { should_not be_blank }
+    its(:slug)     { should eq subject.title.parameterize }
   end
 end

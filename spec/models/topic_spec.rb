@@ -44,14 +44,27 @@ RSpec.describe Topic, type: :model do
 
   describe "slug" do
     let(:child) { topic.children.build(name: "child", description: "Child topic") }
-    let(:grandchild) { child.children.build(name: "grandchild", description: "Grandchild topic") }
-    
-    it "should contain the names of its ancestors" do
+    let(:grandchild) { child.children.build(name: "grandchild", 
+                                            description: "Grandchild topic") }
+    let(:expected_sequence) do 
+      expected_sequence = topic.name + " " + child.name + " " + grandchild.name
+    end
+    before do
       topic.save
       child.save
       grandchild.save
-      expected_sequence = topic.name + " " + child.name + " " + grandchild.name
+    end
+    
+    it "should contain the names of its ancestors" do
       expect(grandchild.slug).to eq(expected_sequence.parameterize) 
+    end
+
+    context "when updated" do
+      
+      it "should update the slugs of its descendents" do
+        topic.update_attribute(:name, "topik")
+        expect(grandchild.reload.slug).to eq(expected_sequence.parameterize)
+      end
     end
   end
 end

@@ -10,13 +10,26 @@ class Topic < ActiveRecord::Base
 
   validates :description, presence: true
 
-  private
+  after_update :update_child_slugs
 
-  # Creates a string using the names of ancestors for use as a slug
   def name_with_ancestry
     names = []
     self.ancestors.each { |ancestor| names << ancestor.name }
     names << self.name
     names.join(" ")
+  end
+
+  private
+
+  # Creates a string using the names of ancestors for use as a slug
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
+
+  def update_child_slugs
+    self.children.all.each do |child|
+      child.update_attribute(:slug, child.name_with_ancestry.parameterize)
+    end
   end
 end
