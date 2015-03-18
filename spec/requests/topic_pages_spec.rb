@@ -31,6 +31,10 @@ RSpec.describe "Topic pages", type: :request do
         VCR.use_cassette "instructional_save" do
           create :instructional, topic: topic
         end
+        VCR.use_cassette "instructional_save_2" do
+          create :instructional, url: "https://youtu.be/kffacxfA7G4", # Justin Bieber - Baby
+                                 topic: topic.children.first
+        end
         sign_in user
         visit topic_path(topic)
       end
@@ -45,7 +49,7 @@ RSpec.describe "Topic pages", type: :request do
       end
 
       it "should have links to instructionals" do
-        topic.instructionals.each do |i|
+        topic.descendant_instructionals.each do |i|
           expect(page).to have_link i.title, instructional_url(i)
         end
       end

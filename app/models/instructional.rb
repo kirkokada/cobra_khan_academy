@@ -16,6 +16,8 @@ class Instructional < ActiveRecord::Base
   before_validation :get_uid_from_url
   before_validation :get_additional_info
 
+  scope :recent, -> { order("created_at DESC") }
+
 
   def video
     @video ||= get_video

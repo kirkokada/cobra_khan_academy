@@ -3,7 +3,6 @@ class TopicsController < ApplicationController
   
   def show
     @topic = Topic.find(params[:id])
-    @instructionals = @topic.instructionals.paginate(page: params[:page])
-    @related = @topic.descendant_instructionals
+    @instructionals = @topic.descendant_instructionals.recent.paginate(page: params[:page])
   end
 end

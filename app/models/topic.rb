@@ -20,7 +20,7 @@ class Topic < ActiveRecord::Base
   end
 
   def descendant_instructionals
-    Instructional.where("topic_id IN (:descendant_ids)", descendant_ids: descendant_ids)
+    Instructional.where("topic_id IN (:descendant_ids) OR topic_id = :id", descendant_ids: descendant_ids, id: id)
   end
 
   private
