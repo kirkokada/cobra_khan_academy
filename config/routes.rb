@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :topics, only: [:show] do
-    resources :instructionals, only: [:show]
+    resources :instructionals, only: [:show, :new, :create]
   end
 
   resources :instructionals, only: [:show]

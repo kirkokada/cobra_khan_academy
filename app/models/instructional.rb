@@ -9,9 +9,6 @@ class Instructional < ActiveRecord::Base
 
   validates :url, presence: true,
                   format: { with: VALID_URL_REGEX }
-  validates :uid, presence: true, 
-                  length: { is: 11 }, 
-                  uniqueness: true
 
   before_validation :get_uid_from_url
   before_validation :get_additional_info
@@ -44,10 +41,14 @@ class Instructional < ActiveRecord::Base
 
   def get_video
     client = YouTubeIt::Client.new(dev_key: ENV["google_api_key"])
-    begin
-      client.video_by(uid)
-    rescue OpenURI::HTTPError => error
-      self.errors.add(:url)
+    if uid.present?
+      begin
+        client.video_by(uid)
+      rescue OpenURI::HTTPError => error
+        self.errors.add(:url)
+        nil
+      end
+    else
       nil
     end
   end

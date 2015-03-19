@@ -24,7 +24,7 @@ RSpec.describe "Topic pages", type: :request do
       end
     end
 
-    describe "elements" do
+    describe "page" do
 
       before do 
         3.times { create :topic, parent_id: topic.id }
@@ -41,6 +41,7 @@ RSpec.describe "Topic pages", type: :request do
       
       it { should have_text topic.name.titleize }
       it { should have_text topic.description }
+      it { should have_link "Submit an instructional", new_topic_instructional_path(topic) }
 
       it "should have links to child topics" do
         topic.children.each do |t|
