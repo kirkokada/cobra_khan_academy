@@ -53,9 +53,29 @@ body {
   border-radius: 0;
 }
 
+.navbar-form {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .input-group-btn .btn{
   padding: 9px 12px;
 } 
+
+.topic_links .list-group {
+  margin-bottom: 0px;
+  .list-group-item {
+    padding-left: 100px;
+    a {
+      color: $gray-light;
+      &:hover {
+        color: $gray-dark;
+      }
+    }
+  }
+}
 
 /* front page */
 

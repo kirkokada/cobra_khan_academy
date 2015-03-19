@@ -12,6 +12,8 @@ class Topic < ActiveRecord::Base
 
   after_update :update_child_slugs
 
+  # Returns a string with the names of all ancestors for use as the slug.
+
   def name_with_ancestry
     names = []
     self.ancestors.each { |ancestor| names << ancestor.name }
@@ -19,6 +21,8 @@ class Topic < ActiveRecord::Base
     names.join(" ")
   end
 
+  # Returns instructionals belonging to self and to descendants
+  
   def descendant_instructionals
     Instructional.where("topic_id IN (:descendant_ids) OR topic_id = :id", descendant_ids: descendant_ids, id: id)
   end

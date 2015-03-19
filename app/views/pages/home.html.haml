@@ -1,9 +1,11 @@
 - if current_user
   .row
-    %aside.col-md-4
-      %h1 Stuff over here
-    .col-md-8
-      .container
+    .col-md-6
+      .list-group-item
+        %h2 New Instructionals
+      = render @new_instructionals
+    .col-md-6
+      .list-group-item
         %h1 Stuff over here
 - else
   .jumbotron

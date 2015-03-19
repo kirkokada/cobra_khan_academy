@@ -25,7 +25,6 @@
               #{current_user.email}<span class="caret" />
             %ul.dropdown-menu{"role": "menu", "aria-labelledby": "user-dropdown"}
               %li= link_to "Settings", edit_user_registration_path
-              %li= link_to "Profile", "#"
               %li.divider
               %li= link_to "Sign out", destroy_user_session_path, method: :delete
         - else
