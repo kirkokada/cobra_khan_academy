@@ -1,0 +1,5 @@
+.search_results
+  .col-md-8.col-md-offset-2
+    .list-group-item.search_results_count
+      %h5= pluralize(@instructionals.count, "result")
+    = render partial: "instructionals/instructional", collection: @instructionals

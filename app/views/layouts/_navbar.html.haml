@@ -7,12 +7,7 @@
           %a{ "href": "#subject_nav_inner", "data-toggle": "collapse", "data-parent": "#subject_nav", "aria-expanded": true, "aria-controls": "#subject_nav_inner"}
             Topics <span class="caret" />
         %li
-          %form.navbar-form
-            .input-group
-              %input.form-control{"type": "text", "placeholder": "Search"}
-              %span.input-group-btn
-                %button.btn.btn-default{"type": "submit"}
-                  %span.glyphicon.glyphicon-search
+          = render 'layouts/search_form'
         %li.visible-xs.visible-s
           = render "layouts/topic_links"
       %ul.nav.navbar-nav.navbar-right

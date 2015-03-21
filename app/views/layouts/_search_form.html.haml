@@ -1,0 +1,7 @@
+= form_tag "/search", method: :get, class: "navbar-form" do
+  .input-group
+    = label_tag :query, nil, class: "hidden"
+    = text_field_tag :query, params[:query], placeholder: "Search", class: "form-control"
+    %span.input-group-btn
+      = button_tag class: "btn btn-default", id: "search_submit" do
+        %span.glyphicon.glyphicon-search

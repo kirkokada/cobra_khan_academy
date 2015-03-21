@@ -1,13 +1,14 @@
-- unless @topic.is_root?
-  %ol.breadcrumb
-    - @topic.ancestors.each do |ancestor|
-      %li= link_to ancestor.name, ancestor
-    %li.active= link_to @topic.name, @topic
 %aside.col-md-3
   .list-group
     .list-group-item
-      %h2
-        = @topic.name.titleize
+      - unless @topic.is_root?
+        .ancestry.topic_ancestry
+          - @topic.ancestors.each do |ancestor|
+            = link_to ancestor.name, ancestor
+            %span /
+      .topic_name
+        %h2
+          = @topic.name.titleize
       %p
         %em= @topic.description
       .submit_instructional_button

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+
   root 'pages#home'
 
   ActiveAdmin.routes(self)
 
   get "admin/topics/:id/children/new" => "admin/topics#new", as: :new_admin_child_topic
+  get 'search/' => 'search#search'
 
   devise_for :users
 

@@ -140,24 +140,53 @@ aside.col-md-3 {
   padding-right: 0;
 }
 
+/* ancestry */
+
+.ancestry {
+  font-size: 0.8em;
+}
+
+/* search */
+
+.search_results_count {
+  text-align: right;
+  h5 {
+    margin-right: 40px;
+  }
+}
+
+.search_results {
+  highlight {
+    font-weight: bold;
+    font-style: none;
+  }
+}
+
 /* topics */
 
-h2 .parent_topic_name {
-  font-size: 0.8em
+.topic_name {
+  h2 {
+    margin-top: 5px;
+  }
 }
 
-.topic_instructional_title {
-  font-size: 1.2em;
-}
-
-.topic_instructional_description {
+.topic .topic_description {
   font-style: italic;
 }
 
-.topic_instructional_thumbnail img {
+/* instructionals */
+
+.instructional_title {
+  font-size: 1.2em;
+}
+
+.instructional_description {
+  font-style: italic;
+}
+
+.instructional_thumbnail img {
   width: 100%
 }
-/* instructionals */
 
 .instructional_video {
   position: relative;

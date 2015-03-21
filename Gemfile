@@ -3,8 +3,11 @@ ruby "2.2.0"
 
 gem 'rails', '4.2.0'
 gem 'pg'
-gem 'sass-rails', '~> 5.0'
+gem 'puma'
 gem 'haml-rails'
+
+# assets
+gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
 gem 'will_paginate-bootstrap'
 gem 'uglifier', '>= 1.3.0'
@@ -13,8 +16,10 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+# authentication 
 gem 'devise'
-gem 'puma'
+
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_admin-sortable_tree'
 gem 'ancestry'
@@ -22,6 +27,8 @@ gem 'ancestry_uniqueness'
 gem 'figaro'
 gem 'youtube_it'
 gem 'friendly_id'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 
 group :development, :test do

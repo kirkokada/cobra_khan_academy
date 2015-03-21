@@ -1,0 +1,9 @@
+.topic.list-group-item{id: "#{topic.slug}"}
+  .row
+    .topic_name
+      - topic.ancestor_names.each do |name|
+        - name << " > "
+        %span= name
+      = link_to topic.name, topic_path(topic)
+    .topic_description
+      = truncate(topic.description, length: 140)

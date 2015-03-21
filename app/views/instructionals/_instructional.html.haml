@@ -1,10 +1,18 @@
-.topic_instructional.list-group-item
+.instructional.list-group-item
   .row
-    .col-sm-2.hidden-xs.topic_instructional_thumbnail
-      = link_to instructional do
-        = image_tag instructional.thumbnail
-    .col-sm-10.topic_instructional_info
-      .topic_instructional_title
-        = link_to instructional.title, instructional_path(instructional)
-      .topic_instructional_description
-        = truncate(instructional.description, length: 140)
+    .col-sm-2.hidden-xs.instructional_thumbnail
+      = link_to instructional_path(instructional.slug) do
+        = youtube_thumbnail_for(instructional.uid)
+    .col-sm-10.instructional_info
+      .instructional_title
+        - if instructional.try(:highlight).try(:title)
+          - title = instructional.highlight.title[0].html_safe
+        - else
+          - title = instructional.title
+        = link_to title, instructional_path(instructional.slug)
+      .instructional_description
+        - if instructional.try(:highlight).try(:description)
+          - description = instructional.highlight.description[0].html_safe
+        - else
+          - description = instructional.description
+        = truncate(description, length: 140)

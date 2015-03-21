@@ -15,10 +15,15 @@ class Topic < ActiveRecord::Base
   # Returns a string with the names of all ancestors for use as the slug.
 
   def name_with_ancestry
-    names = []
-    self.ancestors.each { |ancestor| names << ancestor.name }
+    names = ancestor_names
     names << self.name
     names.join(" ")
+  end
+
+  def ancestor_names
+    names = []
+    self.ancestors.each { |ancestor| names << ancestor.name }
+    names
   end
 
   # Returns instructionals belonging to self and to descendants
