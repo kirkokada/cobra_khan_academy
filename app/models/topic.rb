@@ -17,7 +17,7 @@ class Topic < ActiveRecord::Base
   def name_with_ancestry
     names = ancestor_names
     names << self.name
-    names.join(" ")
+    names.join(" > ")
   end
 
   def ancestor_names

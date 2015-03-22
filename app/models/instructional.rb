@@ -6,7 +6,7 @@ class Instructional < ActiveRecord::Base
 
   friendly_id :title, use: [:slugged, :finders]
 
-  belongs_to :topic
+  belongs_to :topic, dependent: :destroy
 
   VALID_URL_REGEX = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
 

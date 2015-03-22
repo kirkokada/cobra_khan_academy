@@ -1,5 +1,6 @@
 ActiveAdmin.register Topic do
   permit_params :ancestry, :description, :name
+  menu priority: 8
 
   sortable tree: true,
            sorting_attribute: :ancestry,
@@ -21,6 +22,8 @@ ActiveAdmin.register Topic do
       links.html_safe
     end
   end
+
+  index as: :table
 
   action_item :new_instructional, only: :show do
     link_to "New Instructional", new_admin_topic_instructional_path(topic)

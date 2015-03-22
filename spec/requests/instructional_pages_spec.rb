@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Instructional Pages", type: :request do
     subject { page }
-    let(:topic) { create :topic }
+    let!(:topic) { create :topic }
     let(:uid) { "9bZkp7q19f0" } # Gangman Style!
     let(:url) { "http://youtu.be/#{uid}" }
     let(:user) { create :user }
@@ -13,26 +13,27 @@ RSpec.describe "Instructional Pages", type: :request do
 
       before do
         sign_in create :user, admin: true
-        visit new_admin_topic_instructional_path(topic)
+        visit new_admin_instructional_path
       end
 
       it "should create a new instructional" do
         fill_in "Url", with: url
+        select topic.slug, from: "Topic" 
         expect do
           VCR.use_cassette "instructional_save" do
             click_button "Create Instructional"
           end
-        end.to change(topic.instructionals, :count).by 1
+        end.to change(Instructional, :count).by 1
       end
 
       it { should have_selector "input#instructional_url"}
-      it { should have_selector "input#instructional_title" }
-      it { should have_selector "textarea#instructional_description" }
+      it { should have_selector "select#instructional_topic_id" }
 
+      it { should_not have_selector "input#instructional_title" }
       it { should_not have_selector "input#instructional_author" }
       it { should_not have_selector "input#instructional_uid" }
       it { should_not have_selector "input#instructional_duration" }
-      it { should_not have_selector "input#instructional_topic" }
+      it { should_not have_selector "textarea#instructional_description" }
     end
   end
 
