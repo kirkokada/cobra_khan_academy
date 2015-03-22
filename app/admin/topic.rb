@@ -2,6 +2,8 @@ ActiveAdmin.register Topic do
   permit_params :ancestry, :description, :name
   menu priority: 8
 
+  active_admin_importable
+
   sortable tree: true,
            sorting_attribute: :ancestry,
            parent_method: :parent,

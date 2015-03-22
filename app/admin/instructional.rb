@@ -3,6 +3,8 @@ ActiveAdmin.register Instructional do
   belongs_to :topic, optional: true
   menu priority: 9
   
+  active_admin_importable
+
   # Displays topic filter using slugs sorted alphabetically as select options
   filter :topic, as: :select, collection: Topic.pluck(:slug, :id).sort_by{ |a| a[0] }
   filter :title
