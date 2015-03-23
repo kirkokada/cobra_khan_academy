@@ -13,7 +13,7 @@
       %ul.nav.navbar-nav.navbar-right
         - if current_user.try(:is_admin?)
           %li
-            = link_to "Admin", admin_root_url
+            = link_to "Admin", admin_root_path
         - if current_user
           %li.dropdown
             %a.dropdown-toggle#user-dropdown{"href": "#", "data-toggle": "dropdown", "aria-expanded": true}
