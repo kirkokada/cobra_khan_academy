@@ -26,6 +26,10 @@ class Topic < ActiveRecord::Base
     names
   end
 
+  def children_by_priority
+    children.order('priority asc')
+  end
+
   # Returns instructionals belonging to self and to descendants
   
   def descendant_instructionals

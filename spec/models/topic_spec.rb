@@ -7,6 +7,7 @@ RSpec.describe Topic, type: :model do
   it { should respond_to :description }
   it { should respond_to :name }
   it { should respond_to :parent }
+  it { should respond_to :priority }
 
   describe "name" do
     

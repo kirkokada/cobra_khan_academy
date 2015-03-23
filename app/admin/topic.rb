@@ -1,5 +1,5 @@
 ActiveAdmin.register Topic do
-  permit_params :ancestry, :description, :name
+  permit_params :ancestry, :description, :name, :priority
   menu priority: 8
 
   active_admin_importable
@@ -7,7 +7,7 @@ ActiveAdmin.register Topic do
   sortable tree: true,
            sorting_attribute: :ancestry,
            parent_method: :parent,
-           children_method: :children,
+           children_method: :children_by_priority,
            roots_method: :roots,
            collapsible: true
 
@@ -15,7 +15,7 @@ ActiveAdmin.register Topic do
     label :name
     actions do |topic|
       links = ""
-      links << link_to("New Child", 
+      links << link_to("New Subtopic", 
                        new_admin_child_topic_path(topic), 
                        class: "member_link")
       links << link_to("New Instructional", 
@@ -58,9 +58,13 @@ ActiveAdmin.register Topic do
       row :name
       row :description
       row :ancestry
+      row :priority
       row :slug
       row :created_at
       row :updated_at
+    end
+    ul do
+      li link_to "Instructionals", admin_topic_instructionals_path(topic)
     end
   end
 
@@ -70,6 +74,7 @@ ActiveAdmin.register Topic do
       input :name
       input :description
       input :ancestry, as: :hidden unless f.object.ancestry.nil?
+      input :priority
     end
     actions
   end
