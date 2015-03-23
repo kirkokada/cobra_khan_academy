@@ -8,4 +8,8 @@ class SearchController < ApplicationController
       @instructionals = Instructional.search(params[:query])
     end
   end
+
+  def autocomplete
+    render json: Instructional.search(params[:term]).map(&:title)
+  end
 end

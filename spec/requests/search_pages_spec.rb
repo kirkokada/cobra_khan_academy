@@ -12,7 +12,7 @@ RSpec.describe "Search pages", type: :request do
   context "as an unauthenticated user" do
     before do
       visit root_path
-      fill_in "Query", with: "stuff"
+      fill_in "navbar_search", with: "stuff"
     end
 
     it "should redirect to sign in" do
@@ -27,7 +27,7 @@ RSpec.describe "Search pages", type: :request do
       visit root_path
       Instructional.import # Update the elastic search index
       sleep 1 # Allow elastic search to catch up
-      fill_in "Query", with: query
+      fill_in "navbar_search", with: query
       click_button "search_submit"
     end
 

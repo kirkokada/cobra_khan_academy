@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get "admin/topics/:id/children/new" => "admin/topics#new", as: :new_admin_child_topic
   get 'search/' => 'search#search'
+  get 'search/autocomplete' => 'search#autocomplete'
 
   devise_for :users
 

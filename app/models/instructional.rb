@@ -1,8 +1,7 @@
 class Instructional < ActiveRecord::Base
   extend FriendlyId
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
-  index_name "cka-instructionals-#{Rails.env}"
+  include SearchableInstructional
+
 
   friendly_id :title, use: [:slugged, :finders]
 
@@ -18,19 +17,7 @@ class Instructional < ActiveRecord::Base
 
   scope :recent, -> { order("created_at DESC") }
 
-  # Elastic search settings
-  settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'false' do
-      indexes :title, type: "multi_field" do
-        indexes :title, analyzer: 'snowball'
-        indexes :tokenized, analyzer: 'simple'
-      end
-      indexes :description, type: "multi_field" do
-        indexes :description, analyzer: "snowball"
-        indexes :tokenized, analyzer: 'simple'
-      end
-    end
-  end
+  
 
   def video
     @video ||= get_video
@@ -46,29 +33,6 @@ class Instructional < ActiveRecord::Base
 
   def thumbnail
     "http://img.youtube.com/vi/#{uid}/default.jpg"
-  end
-
-  # Elastic Search method
-
-  def self.search(query)
-    __elasticsearch__.search(
-    {
-      query: {
-        multi_match: {
-          query: query,
-          fields: ['title^10', 'description']
-        }
-      },
-      highlight: {
-        pre_tags: ['<highlight>'],
-        post_tags: ['</highlight>'],
-        fields: {
-          title: {},
-          description: {}
-        }
-      }
-    }
-      )
   end
 
 
