@@ -67,5 +67,3 @@ class Instructional < ActiveRecord::Base
     end
   end
 end
-
-Instructional.import # for auto-sync with Elastic Search

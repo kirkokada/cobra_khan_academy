@@ -2,8 +2,6 @@ ActiveAdmin.register Instructional do
   permit_params :url, :title, :description
   belongs_to :topic, optional: true
   menu priority: 9
-  
-  active_admin_importable
 
   # Displays topic filter using slugs sorted alphabetically as select options
   filter :topic, as: :select, collection: Topic.pluck(:slug, :id).sort_by{ |a| a[0] }
@@ -13,6 +11,10 @@ ActiveAdmin.register Instructional do
     topic = Topic.find(inputs[:topic])
     ids.each { |id| Instructional.find(id).update_column(:topic_id, topic.id) }
     redirect_to collection_path, notice: "Instructional updated"
+  end
+
+  action_item :import_instructionals, only: :index do
+    link_to "Import CSV", new_admin_csv_importer_path(model_name: "Instructional")
   end
 
   index do
@@ -34,5 +36,16 @@ ActiveAdmin.register Instructional do
       input :url
     end
     actions
+  end
+
+  csv do
+    column :id
+    column :url
+    column :topic_id
+    column :title
+    column :description
+    column :author
+    column :duration
+    column :created_at
   end
 end

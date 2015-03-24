@@ -149,7 +149,7 @@ RSpec.describe "Topic pages", type: :request do
         fill_in "Description", with: "Child of a topic"
       end
 
-      it { should have_selector "input#topic_ancestry", visible: false }
+      it { should have_selector "select#topic_parent_id" }
 
       it "should create a new child topic" do
         expect do

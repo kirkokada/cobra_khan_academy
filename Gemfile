@@ -16,18 +16,26 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'friendly_id'
 
 # authentication 
 gem 'devise'
 
+# Active Admin
 gem 'activeadmin', github: 'activeadmin'
-gem 'active_admin_importable'
 gem 'active_admin-sortable_tree'
+
+# Ancestry
 gem 'ancestry'
 gem 'ancestry_uniqueness'
+
+# API key managment
 gem 'figaro'
+
+# API wrappers
 gem 'youtube_it'
-gem 'friendly_id'
+
+# Elasticsearch
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 

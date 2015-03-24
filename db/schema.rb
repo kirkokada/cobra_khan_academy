@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323203303) do
+ActiveRecord::Schema.define(version: 20150324024411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150323203303) do
     t.string   "ancestry"
     t.string   "slug"
     t.integer  "priority",    default: 1
+    t.string   "position"
   end
 
   add_index "topics", ["ancestry"], name: "index_topics_on_ancestry", using: :btree
