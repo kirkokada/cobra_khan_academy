@@ -1,5 +1,5 @@
 ActiveAdmin.register Instructional do
-  permit_params :url, :title, :description
+  permit_params :url, :title, :description, :topic_id
   belongs_to :topic, optional: true
   menu priority: 9
 

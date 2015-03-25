@@ -11,6 +11,7 @@ class Instructional < ActiveRecord::Base
 
   validates :url, presence: true,
                   format: { with: VALID_URL_REGEX }
+  validates :topic_id, presence: true
 
   before_validation :get_uid_from_url
   before_validation :get_additional_info

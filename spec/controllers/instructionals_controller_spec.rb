@@ -4,9 +4,10 @@ require 'support/controller_helpers'
 RSpec.describe InstructionalsController, type: :controller do
 
   describe "GET #show" do
+    let(:topic) { create :topic }
     let(:instructional) do
       VCR.use_cassette "instructional_save" do
-        create :instructional
+        create :instructional, topic: topic
       end
     end
 

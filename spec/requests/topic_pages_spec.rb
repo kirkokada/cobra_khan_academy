@@ -32,7 +32,7 @@ RSpec.describe "Topic pages", type: :request do
                                             parent: topic, 
                                             priority: 1 }
       before do 
-        create_instructional
+        create_instructional(topic: topic)
         VCR.use_cassette "instructional_save_2" do
           create :instructional, url: "https://youtu.be/kffacxfA7G4", # Justin Bieber - Baby
                                  topic: topic.children.first
