@@ -58,8 +58,8 @@ RSpec.describe "CsvImporters", type: :request do
             fill_in "Description", with: "description"
           end
 
-          it "should not raise an error" do
-            expect { click_button "Create Topic" }.not_to raise_error
+          it "should create a record" do
+            expect { click_button "Create Topic" }.to change(Topic, :count).by(1)
           end
         end
       end

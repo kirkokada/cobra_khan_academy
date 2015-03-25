@@ -12,8 +12,13 @@ ActiveAdmin.register CSVImporter do
     def create
       @csv_importer = CSVImporter.new(permitted_params[:csv_importer])
       model_name = permitted_params[:csv_importer][:model_name]
-      redirect_path = self.send("admin_#{model_name.downcase.pluralize}_path")
+      table_name = model_name.downcase.pluralize
+      redirect_path = self.send("admin_#{table_name}_path")
       if @csv_importer.save
+        # Need to reset the pkey sequence of the database if id is
+        # assigned through the csv or else manually adding records will generate a
+        # non-unique pkey error in postgres db.
+        ActiveRecord::Base.connection.reset_pk_sequence!(table_name) 
         flash[:notice] = "Successfully Imported"
         redirect_to redirect_path
       else
