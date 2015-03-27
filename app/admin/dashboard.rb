@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Instructionals" do
           ul do
             Instructional.recent.take(5).map do |inst|
-              li "#{link_to(inst.title, admin_instructional_path(inst))} (#{inst.topic.name_with_ancestry})".html_safe
+              li "#{link_to(inst.title, admin_instructional_path(inst))} (#{inst.topic_name_with_ancestry})".html_safe
             end
           end
         end

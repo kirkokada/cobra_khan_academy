@@ -36,6 +36,14 @@ class Instructional < ActiveRecord::Base
     "http://img.youtube.com/vi/#{uid}/default.jpg"
   end
 
+  def topic_name_with_ancestry
+    unless topic.nil?
+      topic.name_with_ancestry
+    else
+      "No topic set."
+    end
+  end
+
 
   private
 
