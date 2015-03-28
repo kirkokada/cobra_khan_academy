@@ -28,21 +28,17 @@ RSpec.describe "Instructional Pages", type: :request do
 
       it { should have_selector "input#instructional_url"}
       it { should have_selector "select#instructional_topic_id" }
+      it { should have_selector "textarea#instructional_description" }
+      it { should have_selector "input#instructional_title" }
 
-      it { should_not have_selector "input#instructional_title" }
       it { should_not have_selector "input#instructional_author" }
       it { should_not have_selector "input#instructional_uid" }
       it { should_not have_selector "input#instructional_duration" }
-      it { should_not have_selector "textarea#instructional_description" }
     end
   end
 
   describe "show" do
-    let(:instructional) do
-      VCR.use_cassette "instructional_save" do
-        topic.instructionals.create(url: url)
-      end
-    end
+    let(:instructional) { create_instructional url: url, topic: topic }
 
     before do 
       sign_in user

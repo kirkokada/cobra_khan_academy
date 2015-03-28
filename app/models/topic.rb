@@ -28,8 +28,12 @@ class Topic < ActiveRecord::Base
     names
   end
 
-  def children_by_priority
-    children.order('priority asc')
+  def subtopics
+    self.children
+  end
+
+  def subtopics_by_priority
+    subtopics.order('priority asc')
   end
 
   # Returns instructionals belonging to self and to descendants

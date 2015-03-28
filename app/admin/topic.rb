@@ -5,7 +5,7 @@ ActiveAdmin.register Topic do
   sortable tree: true,
            sorting_attribute: :position,
            parent_method: :parent,
-           children_method: :children_by_priority,
+           children_method: :subtopics_by_priority,
            roots_method: :roots,
            collapsible: true
 

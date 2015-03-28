@@ -1,0 +1,10 @@
+.list-group#subtopics
+  .list-group-item
+    %h5 
+      %a{ 'href': '#subtopics_list', 'data-toggle': 'collapse', 'data-parent': '#subtopics'} 
+        Subtopics (#{@topic.subtopics.count})
+        %span.caret
+    #subtopics_list.collapse
+      %ul.subtopics_list
+        - @topic.subtopics_by_priority.each do |topic|
+          %li.subtopic= link_to topic.name, topic_path(topic)

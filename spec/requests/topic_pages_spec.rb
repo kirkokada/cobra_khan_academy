@@ -52,8 +52,8 @@ RSpec.describe "Topic pages", type: :request do
       end
 
       it "should have links to child topics in the order of ascending priority" do
-        expect(page).to have_selector "div.subtopics div:nth-child(2)", text: high_priority.name
-        expect(page).to have_selector "div.subtopics div:nth-child(3)", text: low_priority.name
+        expect(page).to have_selector "ul.subtopics_list li:nth-child(1)", text: high_priority.name
+        expect(page).to have_selector "ul.subtopics_list li:nth-child(2)", text: low_priority.name
       end
 
       it "should have links to instructionals" do
@@ -87,9 +87,7 @@ RSpec.describe "Topic pages", type: :request do
 
     describe "show" do
       before do
-        VCR.use_cassette "instructional_save" do
-          create :instructional, topic: topic
-        end
+        create_instructional topic: topic
         visit admin_topic_path(topic)
       end
       

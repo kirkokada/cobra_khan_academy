@@ -34,6 +34,8 @@ ActiveAdmin.register Instructional do
     inputs do
       input :topic, as: :select, collection: Topic.pluck(:slug, :id).sort_by{ |a| a[0] }
       input :url
+      input :title
+      input :description
     end
     actions
   end

@@ -15,12 +15,8 @@
         = link_to "Submit an instructional",
                   new_topic_instructional_path(@topic),
                   class: "btn btn-success"
-  - if @topic.children.any?
-    .list-group.subtopics
-      .list-group-item
-        %h4 Subtopics (#{@topic.children.count})
-      - @topic.children_by_priority.each do |child|
-        .list-group-item= link_to child.name, topic_path(child)
+  - if @topic.subtopics.any?
+    = render 'subtopics_list'
 .col-md-9
   = render @instructionals if @instructionals.any?
   = will_paginate @instructionals
