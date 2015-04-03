@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Instructional, type: :model do
   let(:topic) { create :topic }
+  let(:uid) { "9bZkp7q19f0" } # Gangman Style!
+  let(:url) { "http://youtu.be/#{uid}" }
   subject(:instructional) { topic.instructionals.build }
 
   it { should respond_to :url }
@@ -52,8 +54,6 @@ RSpec.describe Instructional, type: :model do
   end
 
   describe "when saved" do
-    let(:uid) { "9bZkp7q19f0" } # Gangman Style!
-    let(:url) { "http://youtu.be/#{uid}" }
 
     before do
       subject.url = url
@@ -68,5 +68,20 @@ RSpec.describe Instructional, type: :model do
     its(:title)    { should_not be_blank }
     its(:slug)     { should_not be_blank }
     its(:slug)     { should eq subject.title.parameterize }
+  end
+
+  context "when uid is not unique" do
+    before do
+      VCR.use_cassette "instructional_save" do
+        topic.instructionals.create(url: url)
+      end
+    end
+
+    it "should not be saved" do
+      instructional.url = url
+      VCR.use_cassette "instructional_save" do
+        expect { instructional.save }.not_to change(Instructional, :count)
+      end
+    end
   end
 end

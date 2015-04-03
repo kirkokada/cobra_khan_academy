@@ -12,6 +12,7 @@ class Instructional < ActiveRecord::Base
   validates :url, presence: true,
                   format: { with: VALID_URL_REGEX }
   validates :topic_id, presence: true
+  validates :uid, uniqueness: true
 
   before_validation :get_uid_from_url
   before_validation :get_additional_info
@@ -50,6 +51,10 @@ class Instructional < ActiveRecord::Base
   def get_uid_from_url
     matches = url.match(VALID_URL_REGEX)
     self.uid = matches[2] if matches && matches[2]
+  end
+
+  def uid_is_unique
+    
   end
 
   def get_video
