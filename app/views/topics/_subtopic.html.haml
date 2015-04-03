@@ -1,0 +1,10 @@
+%li.subtopic{'id': "#{subtopic.slug}"}
+  = link_to subtopic.name, topic_path(subtopic)
+  - if subtopic.subtopics.any?
+    %a{ 'href': "##{subtopic.slug}_subtopics", 'data-toggle': 'collapse', 'data-parent': '#subtopics'} 
+      (#{subtopic.subtopics.count})
+      %span.caret
+    %div.collapse{ 'id': "#{subtopic.slug}_subtopics"}
+      %ul.subtopics_list
+        - subtopic.subtopics_by_priority.each do |subtopic|
+          = render 'subtopic', subtopic: subtopic
