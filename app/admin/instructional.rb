@@ -24,7 +24,7 @@ ActiveAdmin.register Instructional do
       truncate(instructional.description, omission: "...", length: 150)
     end
     column "Topic" do |instructional|
-      instructional.topic.name_with_ancestry
+      instructional.topic_name_with_ancestry
     end
     actions
   end

@@ -12,7 +12,8 @@ RSpec.describe "Instructional Pages", type: :request do
     describe "new" do
 
       before do
-        sign_in create :user, admin: true
+        user.toggle(:admin).save
+        sign_in user
         visit new_admin_instructional_path
       end
 
@@ -26,14 +27,32 @@ RSpec.describe "Instructional Pages", type: :request do
         end.to change(Instructional, :count).by 1
       end
 
-      it { should have_selector "input#instructional_url"}
-      it { should have_selector "select#instructional_topic_id" }
-      it { should have_selector "textarea#instructional_description" }
-      it { should have_selector "input#instructional_title" }
+      describe "page" do
 
-      it { should_not have_selector "input#instructional_author" }
-      it { should_not have_selector "input#instructional_uid" }
-      it { should_not have_selector "input#instructional_duration" }
+        it { should have_selector "input#instructional_url"}
+        it { should have_selector "select#instructional_topic_id" }
+        it { should have_selector "textarea#instructional_description" }
+        it { should have_selector "input#instructional_title" }
+
+        it { should_not have_selector "input#instructional_author" }
+        it { should_not have_selector "input#instructional_uid" }
+        it { should_not have_selector "input#instructional_duration" }
+      end
+    end
+
+    describe "index" do
+      let!(:instructional) { create_instructional topic: topic }
+      
+      context "when an instructional does not belong to a topic" do
+        before do 
+          user.toggle(:admin).save
+          sign_in user
+          instructional.update_column(:topic_id, nil)
+          visit admin_instructionals_path
+        end
+
+        it { should have_selector "tr#instructional_#{instructional.id} td.col-topic", text: "No topic set" }
+      end
     end
   end
 
